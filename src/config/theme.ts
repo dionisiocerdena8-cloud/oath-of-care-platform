@@ -1,5 +1,8 @@
 export const theme = {
   colors: {
+    background: '#F8F6F1',
+    surface: '#FFFFFF',
+    surfaceMuted: '#F1F0ED',
     deepInk: '#20253A',
     softLilac: '#7D75F5',
     skyBlue: '#68BFEF',
@@ -13,13 +16,15 @@ export const theme = {
     border: '#E8E5F0',
     borderStrong: '#D1CCE8',
     success: '#5CC8A0',
+    warning: '#F3C85B',
+    danger: '#FF7C72',
   },
-  spacing: { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, xxxl: 32 },
-  radius: { xs: 6, sm: 10, md: 14, lg: 18, xl: 24, full: 999 },
+  typography: { display: 64, pageHeading: 36, sectionHeading: 22, body: 16, label: 14, helper: 13 },
+  spacing: { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, xxxl: 32, jumbo: 48 },
+  radius: { xs: 6, sm: 10, md: 12, lg: 16, xl: 22, full: 999 },
   shadows: {
-    soft: '0 2px 10px rgba(32,37,58,.07)',
-    floating: '0 6px 20px rgba(32,37,58,.12)',
-    card: '0 3px 12px rgba(32,37,58,.06)',
+    soft: '0 2px 10px rgba(32,37,58,.06)',
+    floating: '0 16px 44px rgba(20,24,39,.16)',
+    card: '0 1px 3px rgba(32,37,58,.05)',
   },
 } as const;
-

@@ -16,7 +16,7 @@ export function ForgotPasswordPage() {
   return (
     <div className="auth-card compact-auth-card">
       {sent ? <div className="auth-success"><span><CheckCircle2 size={28} /></span><h2>Check your inbox</h2><p>If an account exists for that email, a secure password reset link is on its way.</p><Link className="button" to="/login">Return to sign in</Link></div> :
-      <><div className="auth-heading"><span className="auth-round-icon"><Mail /></span><h2>Reset your password</h2><p>Enter your pharmacy account email and weâ€™ll send a secure reset link.</p></div><form onSubmit={submit} className="form-stack"><label>Email address<input type="email" name="email" placeholder="pharmacy@example.com" required /></label><button className="button form-submit">Send reset link</button></form><p className="auth-switch"><Link to="/login">Back to sign in</Link></p></>}
+      <><div className="auth-heading"><span className="auth-round-icon"><Mail /></span><h2>Reset your password</h2><p>Enter your pharmacy account email and we’ll send a secure reset link.</p></div><form onSubmit={submit} className="form-stack"><label>Email address<input type="email" name="email" placeholder="pharmacy@example.com" required /></label><button className="button form-submit">Send reset link</button></form><p className="auth-switch"><Link to="/login">Back to sign in</Link></p></>}
     </div>
   );
 }

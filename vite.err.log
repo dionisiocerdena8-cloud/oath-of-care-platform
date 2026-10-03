@@ -1,0 +1,23 @@
+file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vinext/dist/server/socket-error-backstop.js:186
+		throw err;
+		^
+
+Error: EBUSY: resource busy or locked, watch 'C:\Users\DION\OneDrive\Desktop\oath-of-care-pharmacy-web\.qa\profile-login\Default\Network\Cookies'
+    at FSWatcher.<computed> (node:internal/fs/watchers:321:19)
+    at Object.watch (node:fs:2548:36)
+    at createFsWatchInstance (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:8497:16)
+    at setFsWatchListener (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:8539:14)
+    at NodeFsHandler._watchWithNodeFs (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:8653:20)
+    at NodeFsHandler._handleFile (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:8697:24)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:8871:26)
+Emitted 'error' event on FSWatcher instance at:
+    at FSWatcher._handleError (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:9670:146)
+    at NodeFsHandler._addToNodeFs (file:///C:/Users/DION/OneDrive/Desktop/oath-of-care-pharmacy-web/node_modules/vite/dist/node/chunks/node.js:8876:18) {
+  errno: -4082,
+  syscall: 'watch',
+  code: 'EBUSY',
+  path: 'C:\\Users\\DION\\OneDrive\\Desktop\\oath-of-care-pharmacy-web\\.qa\\profile-login\\Default\\Network\\Cookies',
+  filename: 'C:\\Users\\DION\\OneDrive\\Desktop\\oath-of-care-pharmacy-web\\.qa\\profile-login\\Default\\Network\\Cookies'
+}
+
+Node.js v24.16.0

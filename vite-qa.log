@@ -1,0 +1,11 @@
+
+> sites-project@0.1.0 dev
+> vinext dev --host 127.0.0.1 --port 5174
+
+
+  vinext dev  (Vite 8.0.13)
+
+Sites local sign-in: seedy@sites.test
+Using secrets defined in .env.local
+  ➜  Local:   http://localhost:5174/
+  ➜  Debug:   http://localhost:5174/__debug
