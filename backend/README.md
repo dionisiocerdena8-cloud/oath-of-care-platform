@@ -35,3 +35,21 @@ The pgTAP security suite is `../supabase/tests/pharmacy_security_rls.test.sql`. 
 
 OpenAPI is available at `/swagger-ui/index.html` in development. Health probes are available at `/actuator/health`.
 
+## Cloud Deployment (Render Docker)
+
+The backend is containerized via the root `Dockerfile` using a multi-stage Java 21 build.
+
+### Build & Run locally with Docker
+```bash
+docker build -t oath-pharmacy-api .
+docker run -p 8080:8080 -e DATABASE_URL="..." -e DATABASE_USERNAME="..." -e DATABASE_PASSWORD="..." oath-pharmacy-api
+```
+
+### Render Web Service Configuration
+- **Environment**: Docker
+- **Docker Context**: `.` (repository root)
+- **Dockerfile Path**: `./Dockerfile`
+- **Health Check Path**: `/actuator/health`
+- See [../DEPLOYMENT.md](../DEPLOYMENT.md) for full environment variable matrix and CORS configuration.
+
+

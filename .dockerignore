@@ -1,0 +1,13 @@
+.git
+.github
+.next
+.vinext
+.wrangler
+.vercel
+dist
+node_modules
+qa-screenshots
+backend/target
+**/.env*
+**/*.log
+**/.DS_Store
