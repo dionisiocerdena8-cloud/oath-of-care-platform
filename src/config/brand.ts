@@ -3,7 +3,6 @@ const runtimeEnv = (import.meta as ImportMeta & { env?: Record<string, string | 
 export const brand = {
   productName: runtimeEnv.VITE_APP_NAME || 'Oath of Care',
   pharmacyLabel: 'Pharmacy Partner',
-  tagline: 'Trusted availability. Better care.',
+  tagline: 'medicine within reach',
   supportEmail: 'support@example.com',
 } as const;
-

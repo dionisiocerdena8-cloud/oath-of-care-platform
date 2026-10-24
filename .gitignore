@@ -36,7 +36,16 @@ yarn-error.log*
 .vercel
 next-env.d.ts
 /dist/
+/backend/target/
 /.wrangler/
 /outputs/
 /work/
 *.tsbuildinfo
+
+# IDE and editors
+.vscode/
+.idea/
+
+# Testing and QA artifacts
+/qa-screenshots/
+/supabase/.temp/

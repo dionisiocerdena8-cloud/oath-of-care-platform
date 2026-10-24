@@ -11,7 +11,7 @@ const ToastContext = createContext<ToastContextValue>({ showToast: () => undefin
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<ToastItem[]>([]);
   const showToast = useCallback((message: string, kind: ToastKind = 'success') => {
-    const id = crypto.randomUUID();
+    const id = globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     setItems((current) => [...current, { id, message, kind }]);
     window.setTimeout(() => setItems((current) => current.filter((item) => item.id !== id)), 3800);
   }, []);

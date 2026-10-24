@@ -1,85 +1,70 @@
-import { ArrowRight, BadgeCheck, BarChart3, Boxes, MapPin, Search, ShieldCheck, Sparkles } from 'lucide-react';
+/* eslint-disable @next/next/no-img-element */
+import { ArrowRight, BadgeCheck, BarChart3, Clock3, MapPin, Menu, PackageCheck, Search, ShieldCheck } from 'lucide-react';
+import { type PointerEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Brand } from '@/src/components/Brand';
-import { runtime } from '@/src/config/runtime';
-
-const metrics = [
-  { value: '128', label: 'Medicines tracked', icon: Boxes },
-  { value: '94%', label: 'Stock accuracy', icon: BadgeCheck },
-  { value: '2.4k', label: 'Search appearances', icon: BarChart3 },
-];
+import { assets } from '@/src/config/assets';
 
 export function LandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const moveHero = (event: PointerEvent<HTMLDivElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty('--hero-x', `${((event.clientX - bounds.left) / bounds.width - .5) * 2}`);
+    event.currentTarget.style.setProperty('--hero-y', `${((event.clientY - bounds.top) / bounds.height - .5) * 2}`);
+  };
+  const resetHero = (event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty('--hero-x', '0');
+    event.currentTarget.style.setProperty('--hero-y', '0');
+  };
   return (
-    <main className="landing-page">
+    <main className="landing-page premium-landing">
       <nav className="landing-nav" aria-label="Primary navigation">
         <Brand />
-        <div className="landing-links"><a href="#platform">Platform</a><a href="#showcase">How it works</a><a href="#trust">Trust & safety</a></div>
-        <div className="nav-actions"><Link className="text-link" to="/login">Sign in</Link><Link className="button button-small" to="/register">Register pharmacy <ArrowRight size={16} /></Link></div>
+        <div className={`landing-links ${menuOpen ? 'open' : ''}`}><a href="#why">For pharmacies</a><a href="#flow">How it works</a><a href="#trust">Trust</a><a href="#footer">Help</a></div>
+        <div className="nav-actions"><Link className="text-link" to="/login">Sign in</Link><Link className="button button-small" to="/register">Join as a pharmacy <ArrowRight size={16} /></Link><button className="landing-menu" aria-label="Toggle navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}><Menu /></button></div>
       </nav>
 
-      <section className="hero-shell">
+      <section className="hero-shell care-hero">
         <div className="hero-copy">
-          <span className="eyebrow"><ShieldCheck size={15} /> Built for verified pharmacy partners</span>
-          <h1>Keep your pharmacy<br /><em>findable</em> when care can’t wait.</h1>
-          <p>Manage medicine availability, respond to stock signals, and help nearby patients find the care they need—all from one calm, reliable workspace.</p>
-          <div className="hero-actions"><Link className="button" to="/register">Join the network <ArrowRight size={18} /></Link><Link className="button button-secondary" to="/login">Open pharmacy portal</Link></div>
-          <div className="trust-row"><span><BadgeCheck size={18} /> Verification-first onboarding</span><span><MapPin size={18} /> Local availability visibility</span></div>
+          <span className="partner-pill">Pharmacy partner network</span>
+          <h1>Make your pharmacy easier to find when care matters.</h1>
+          <p>Keep medicine availability clear, maintain a trusted pharmacy profile, and help people nearby find the care they need with less uncertainty.</p>
+          <div className="hero-actions"><Link className="button" to="/register">Join as a pharmacy <ArrowRight size={18} /></Link><a className="button button-secondary" href="#flow">See how it works</a></div>
+          <div className="trust-row"><span><BadgeCheck /> Verification-led onboarding</span><span><Clock3 /> Availability, not quantities</span></div>
         </div>
-        <DashboardPreview />
-      </section>
-
-      <section className="proof-strip" id="trust" aria-label="Platform principles">
-        <span>One trusted source</span><span>Actual quantity control</span><span>Patient feedback signals</span><span>Private verification documents</span>
-      </section>
-
-      <section className="landing-section feature-section" id="platform">
-        <div className="section-heading"><span className="eyebrow"><Sparkles size={15} /> Purpose-built operations</span><h2>Fewer blind spots. More useful decisions.</h2><p>Everything your team needs to keep availability accurate and patient trust strong.</p></div>
-        <div className="feature-grid">
-          <article><span className="feature-number">01</span><Boxes /><h3>Inventory that stays actionable</h3><p>Manage exact quantities, structured dosages, medicine details, and safe bulk imports.</p></article>
-          <article><span className="feature-number">02</span><BarChart3 /><h3>Visibility you can understand</h3><p>See searches, profile views, directions, patient confirmations, and stock accuracy trends.</p></article>
-          <article><span className="feature-number">03</span><ShieldCheck /><h3>Verification without shortcuts</h3><p>Keep store information separate from private documents and follow every review milestone.</p></article>
+        <div className="hero-art" aria-label="FARO, the Oath of Care pharmacy partner guide" onPointerMove={moveHero} onPointerLeave={resetHero}>
+          <img className="hero-pharmacy-bg" src={assets.pharmacyInterior} alt="" aria-hidden="true" />
+          <span className="hero-orbit orbit-a" /><span className="hero-orbit orbit-b" />
+          <img className="hero-device" src={assets.dashboardDevice} alt="Preview of the pharmacy partner dashboard" />
+          <img className="hero-faro" src={assets.faroHero} alt="FARO, Oath of Care pharmacy partner guide" />
         </div>
       </section>
 
-      <section className="landing-section showcase-section" id="showcase">
-        <div className="showcase-copy"><span className="eyebrow">Product showcase</span><h2>From shelf update to patient discovery.</h2><p>See how one inventory change becomes a reliable availability signal across the care network.</p><Link to="/register" className="inline-link">Start pharmacy onboarding <ArrowRight size={17} /></Link></div>
-        <div className="video-slot">{runtime.showcaseVideoUrl ? <video controls src={runtime.showcaseVideoUrl} /> : <AvailabilityShowcase />}</div>
+      <section className="care-value-band" id="why">
+        <article><span><Search /></span><div><strong>Get discovered</strong><p>Appear when patients search for nearby medicines.</p></div></article>
+        <article><span><PackageCheck /></span><div><strong>Manage availability</strong><p>Use four clear stock states—never quantity counters.</p></div></article>
+        <article><span><BarChart3 /></span><div><strong>See your impact</strong><p>Understand supported search and profile activity.</p></div></article>
+        <article><span><ShieldCheck /></span><div><strong>Build trust</strong><p>Keep permits and credentials ready for review.</p></div></article>
       </section>
 
-      <section className="cta-panel"><div><span className="eyebrow">Ready when your pharmacy is</span><h2>Build a more dependable medicine network.</h2></div><Link className="button button-light" to="/register">Create pharmacy account <ArrowRight size={18} /></Link></section>
-      <footer className="landing-footer"><Brand /><p>Pharmacy tools for trusted medicine availability.</p><span>© 2026. Privacy-first by design.</span></footer>
+      <section className="discovery-story" id="flow">
+        <div className="story-visual"><img src={assets.pharmacyMap} alt="Illustration of a pharmacy appearing in a nearby map search" /></div>
+        <div className="story-copy"><span className="section-kicker">From shelf to search</span><h2>One clear update travels further.</h2><p>Choose the medicine’s current availability. Oath of Care uses that signal to help people understand where to look—without exposing stock quantities.</p><ol><li><span>1</span><div><strong>List the medicine</strong><p>Add the correct name, strength, form, and price.</p></div></li><li><span>2</span><div><strong>Set availability</strong><p>High, medium, low, or out of stock.</p></div></li><li><span>3</span><div><strong>Keep it current</strong><p>Refresh changes from the pharmacy workspace.</p></div></li></ol></div>
+      </section>
+
+      <section className="availability-story">
+        <div><span className="section-kicker">A calmer workflow</span><h2>Built around the decision your team actually makes.</h2><p>No restock math and no quantity steppers. The workspace keeps the daily task focused on a truthful availability status.</p><Link to="/register" className="inline-link">Start pharmacy onboarding <ArrowRight /></Link></div>
+        <img src={assets.availabilityCard} alt="Medicine availability statuses: high, medium, low, and out of stock" />
+      </section>
+
+      <section className="trust-story" id="trust">
+        <img src={assets.verifiedCard} alt="Verified pharmacy badge" />
+        <div><span className="section-kicker">Trust stays visible</span><h2>Public details and private documents have different jobs.</h2><p>Your pharmacy profile helps patients. Verification records stay in the compliance workflow, with clear review states and corrective actions.</p><div className="trust-points"><span><ShieldCheck /> Secure submission paths</span><span><MapPin /> Accurate location details</span><span><BadgeCheck /> Transparent verification state</span></div></div>
+      </section>
+
+      <section className="landing-cta"><div><img src={assets.ribbon} alt="" /><span>Ready to partner?</span><h2>Bring dependable medicine availability closer to your community.</h2></div><Link className="button" to="/register">Create pharmacy account <ArrowRight /></Link></section>
+
+      <footer className="landing-footer" id="footer"><Brand /><p>Pharmacy tools for trusted medicine availability.</p><nav><a href="#why">For pharmacies</a><a href="#trust">Trust</a><a href="mailto:support@example.com">Contact</a></nav><span>© 2026 Oath of Care</span></footer>
     </main>
   );
 }
-
-function DashboardPreview() {
-  return (
-    <div className="hero-product" aria-label="Pharmacy dashboard preview">
-      <div className="product-topbar"><span className="product-logo">+</span><span>Good morning, St. Martha Pharmacy</span><span className="live-pill">Live inventory</span></div>
-      <div className="product-body">
-        <div className="attention-card"><span className="mini-label">Needs attention</span><strong>8 medicines are running low</strong><p>Restock the items patients are searching for most.</p><span className="fake-link">Review inventory <ArrowRight size={15} /></span></div>
-        <div className="metric-grid">{metrics.map(({ value, label, icon: Icon }) => <article key={label} className="metric-card"><Icon size={19} /><strong>{value}</strong><span>{label}</span></article>)}</div>
-        <div className="activity-card">
-          <div><span className="status-dot low" /><b>Paracetamol 500 mg</b><small>Low stock · 8 remaining</small></div>
-          <div><span className="status-dot high" /><b>Amoxicillin 500 mg</b><small>Stock confirmed today</small></div>
-          <div><span className="status-dot medium" /><b>Losartan 50 mg</b><small>Patient report needs review</small></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function AvailabilityShowcase() {
-  return (
-    <div className="showcase-flow" aria-label="Medicine search to verified pharmacy availability">
-      <div className="showcase-search"><Search size={17} /><span>Paracetamol 500 mg</span><kbd>Search</kbd></div>
-      <div className="showcase-result">
-        <div className="showcase-result-head"><span className="showcase-store-mark">SM</span><div><strong>St. Martha Pharmacy</strong><small><BadgeCheck size={13} /> Verified pharmacy</small></div><span className="availability-pill">Available</span></div>
-        <div className="showcase-result-body"><span><MapPin size={15} /> 1.2 km away · Poblacion</span><div><strong>Paracetamol 500 mg</strong><small>Availability confirmed today</small></div></div>
-      </div>
-      <div className="showcase-signal"><i /><span>Search</span><b /><i /><span>Verified store</span><b /><i /><span>Availability</span></div>
-    </div>
-  );
-}
-

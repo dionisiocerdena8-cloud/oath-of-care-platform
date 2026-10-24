@@ -7,5 +7,7 @@ export const runtime = {
   showcaseVideoUrl: runtimeEnv.VITE_SHOWCASE_VIDEO_URL || '',
   googleOAuthClientId: runtimeEnv.VITE_GOOGLE_OAUTH_CLIENT_ID || '',
   facebookAppId: runtimeEnv.VITE_FACEBOOK_APP_ID || '',
+  securityApiBase: runtimeEnv.VITE_SECURITY_API_BASE || '',
+  apiBase: (runtimeEnv.VITE_API_BASE_URL || runtimeEnv.VITE_SECURITY_API_BASE || '').replace(/\/$/, ''),
   demoApplicationStatus: runtimeEnv.VITE_DEMO_APPLICATION_STATUS || 'UNDER_REVIEW',
 } as const;

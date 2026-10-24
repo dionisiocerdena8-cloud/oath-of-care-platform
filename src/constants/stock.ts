@@ -1,7 +1,8 @@
-export const MOBILE_STOCK_POLICY = {
-  source: 'Android mobile source audit: src/types/domain.ts',
-  supportedMobileStates: ['IN_STOCK', 'LOW_STOCK', 'OUT_OF_STOCK', 'UNKNOWN'] as const,
-  numericThresholds: null,
-  note: 'The mobile source does not define numeric LOW / MEDIUM / HIGH quantity thresholds. Do not infer production thresholds. MEDIUM_STOCK and HIGH_STOCK must be supplied by the backend until a shared business rule is approved.',
-} as const;
+import type { StockLevel } from '@/src/types/models';
 
+export const STOCK_LEVELS: { value: StockLevel; label: string }[] = [
+  { value: 'HIGH_STOCK', label: 'High stock' },
+  { value: 'MEDIUM_STOCK', label: 'Medium stock' },
+  { value: 'LOW_STOCK', label: 'Low stock' },
+  { value: 'OUT_OF_STOCK', label: 'Out of stock' },
+];

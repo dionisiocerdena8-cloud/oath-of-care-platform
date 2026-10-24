@@ -22,9 +22,15 @@ export function LoginPage() {
     const password = String(data.get('password') || '');
     if (!email.includes('@') || password.length < 8) return showToast('Enter a valid email and at least 8 password characters.', 'error');
     setBusy(true);
-    try { await authService.signInWithPassword(email, password); navigate('/application-status'); }
-    catch (error) { showToast(error instanceof Error ? error.message : 'Sign in failed.', 'error'); }
-    finally { setBusy(false); }
+    try {
+      await authService.signInWithPassword(email, password);
+      const destination = await authService.resolvePostLoginRoute();
+      navigate(destination);
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : 'Sign in failed.', 'error');
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (

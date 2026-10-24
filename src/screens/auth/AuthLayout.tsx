@@ -1,26 +1,22 @@
-import { ArrowLeft, Check, MapPin, Search } from 'lucide-react';
-import { Link, Outlet } from 'react-router-dom';
+/* eslint-disable @next/next/no-img-element */
+import { ArrowLeft, BadgeCheck, ShieldCheck, Users } from 'lucide-react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Brand } from '@/src/components/Brand';
-
-const availability = [42, 68, 54, 82, 61, 91, 74, 86, 58, 77, 94, 70];
+import { assets } from '@/src/config/assets';
 
 export function AuthLayout() {
+  const { pathname } = useLocation();
+  const isRegistration = pathname === '/register';
   return (
-    <main className="auth-page">
+    <main className={`auth-page ${isRegistration ? 'onboarding-page' : ''}`}>
       <section className="auth-story" aria-label="Oath of Care product overview">
-        <div className="auth-story-top"><Brand /><Link to="/" className="back-link"><ArrowLeft size={16} /> Back to site</Link></div>
-        <div className="availability-visual" aria-hidden="true">
-          <div className="availability-grid" />
-          <div className="availability-orbit orbit-one" />
-          <div className="availability-orbit orbit-two" />
-          <div className="availability-bars">{availability.map((height, index) => <i key={index} style={{ height: `${height}%`, animationDelay: `${index * 70}ms` }} />)}</div>
-          <div className="availability-path"><span><Search size={17} /></span><b /><span><Check size={17} /></span><b /><span><MapPin size={17} /></span></div>
-        </div>
-        <div className="auth-story-copy"><span className="eyebrow">Verified pharmacy network</span><h1>Availability,<br /><em>made dependable.</em></h1><p>One accurate update helps nearby patients find the medicine they need with less uncertainty.</p></div>
-        <div className="auth-story-signal"><span /> Live availability signal</div>
+        <img className="auth-pharmacy-background" src={assets.warmPharmacyInterior} alt="" />
+        <div className="auth-story-top"><Brand />{!isRegistration && <Link to="/" className="back-link"><ArrowLeft size={16} /> Back</Link>}</div>
+        <div className="auth-faro"><img src={assets.faroHero} alt="FARO welcoming pharmacy partners" /></div>
+        <div className="auth-story-copy"><span className="partner-pill">Pharmacy partner access</span><h1>Care begins with a pharmacy people can find.</h1><p>Set up accurate location, hours, and credentials in one focused application.</p></div>
+        <div className="auth-benefits"><span><Users /> Community reach</span><span><BadgeCheck /> Admin-reviewed credentials</span><span><ShieldCheck /> Private documents</span></div>
       </section>
-      <section className="auth-form-side"><div className="auth-mobile-header"><Brand /><Link to="/" className="back-link"><ArrowLeft size={16} /> Back to site</Link></div><Outlet /></section>
+      <section className="auth-form-side"><div className="auth-mobile-header"><Brand />{!isRegistration && <Link to="/" className="back-link"><ArrowLeft size={16} /> Back</Link>}</div><Outlet /></section>
     </main>
   );
 }
-
